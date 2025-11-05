@@ -1,71 +1,243 @@
+:root {
+  --color-fondo: #1b1b1b;            /* Fondo principal (header) */
+  --color-texto: #ffffff;            /* Texto general claro */
+  --color-secundario: #d3d3d3;       /* Gris claro */
+  --color-detalle: #a9a9a9;          /* Gris medio */
+  --color-acento: #6b7783;           /* Gris azulado (activo) */
+  --color-hover: #878787;            /* Hover de enlaces */
+  --color-boton: #8d8d8d;            /* Fondo de botón */
+  --color-boton-hover: #000000;      /* Fondo hover del botón */
+  --color-boton-texto: #121212;      /* Texto del botón */
+
+  /* 🌫️ SECCIONES */
+  --color-intro-fondo: #1d1d20;      /* Fondo sección introducción */
+  --color-agenda-fondo: #55575d;     /* Fondo sección agenda */
+  --color-newsletter-fondo: #000000; /* Fondo newsletter */
+  --color-newsletter-card: #a9a9a9;  /* Tarjeta newsletter */
+
+  /* ⚙️ FOOTER */
+  --color-footer-fondo: #212529;
+  --color-footer-texto: #adb5bd;
+  --color-footer-borde: #000000;
+
+  /* 🧱 OTROS */
+  --color-venue-gradient: linear-gradient(90deg, #ffffff, #a9a9a9, #ffffff);
+  --color-barra-agenda: #ffffff;
+  --header-height: 70px;
+}
+
+/* 🔹 ESTILOS GENERALES */
 body {
+  margin: 0;
   font-family: "Exo 2", sans-serif;
-  background-color: #dadada;
-  color: white;
+  background: url('source/SLICER.gif') no-repeat center center/cover;
+  background-attachment: fixed;
+  color: var(--color-texto);
+  overflow-x: hidden;
 }
 
+/* ====== HEADER GENERAL ====== */
 header {
-    display: flex;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-fondo);
+  text-transform: uppercase;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+}
+
+/* --- Toggle --- */
+.navbar-toggler {
+  border: 0;
+  background: transparent;
+}
+.navbar-toggler .navbar-toggler-icon {
+  display: inline-block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-texto);
+  position: relative;
+}
+.navbar-toggler .navbar-toggler-icon::before,
+.navbar-toggler .navbar-toggler-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-texto);
+}
+.navbar-toggler .navbar-toggler-icon::before { top: -7px; }
+.navbar-toggler .navbar-toggler-icon::after { top: 7px; }
+
+/* --- Menú desplegable --- */
+header .collapse.navbar-collapse {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 10px;
+  right: 10px;
+  background: var(--color-fondo);
+  padding: 12px;
+  border-radius: 8px;
+  z-index: 950;
+  display: none;
+}
+header .collapse.navbar-collapse.show {
+  display: block;
+}
+.navbar-nav {
+  flex-direction: column;
+  gap: 8px;
+}
+.navbar-nav .nav-link {
+  display: block;
+  text-align: left;
+}
+
+/* ===============================
+   VISTA ESCRITORIO (>=992px)
+=============================== */
+@media (min-width: 992px) {
+  header {
+    flex-direction: row;
     justify-content: space-between;
-    align-items: center; /* 🔹 centra verticalmente todo dentro del header */
+    align-items: center;
     padding: 20px 40px;
-    background: rgb(27, 27, 27);
-    text-transform: uppercase;
-}
+  }
 
-/* 🔹 NAV centrado verticalmente */
-nav {
+  /* 🔹 Oculta el toggle en escritorio */
+  .navbar-toggler {
+    display: none !important;
+  }
+
+  /* 🔹 Menú visible y horizontal */
+  header .collapse.navbar-collapse {
+    position: static;
+    display: flex !important;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  .navbar-nav {
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+  }
+
+  /* 🔹 Logo centrado con imagen + texto juntos */
+  .col-4.order-2.logo {
     display: flex;
-    align-items: center; /* centra los enlaces dentro de nav */
-}
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+  }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    transition: color 0.3s;
-}
-
-nav a.active {
-    color: #6b7783;
-    font-weight:bold;
-}
-
-nav a:hover {
-    color: #878787;
-    border-bottom: 1px solid;
-}
-
-/* 🔹 LOGO con imagen y texto en dos líneas */
-.logo {
-    display: flex;
-    align-items: center; /* centra verticalmente el logo y el texto */
-    gap: 10px; /* espacio entre imagen y texto */
-    text-align: left;
-}
-
-.logo img {
-    width: 50px;  /* ajusta según el tamaño que prefieras */
+  .logo img {
+    width: 50px;
     height: auto;
-}
+  }
 
-.logo-text h1 {
-    margin: 0;
+  .logo-text h1 {
     font-size: 1.8rem;
-    color: #D3D3D3;
-}
-
-.logo-text p {
     margin: 0;
-    font-size: 0.8rem;
-    color: #A9A9A9;
-    text-transform: none; /* mantiene “for Latinoamérica” en minúsculas */
-}
+    color: var(--color-secundario);
+  }
 
-.location {
+  .logo-text p {
+    font-size: 0.8rem;
+    margin: 0;
+    color: var(--color-detalle);
+    text-transform: none;
+  }
+
+  /* 🔹 Ubicación a la derecha */
+  .col-4.order-3 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .location {
     margin: 0;
     font-size: 0.9rem;
-    color: #D3D3D3;
+    color: var(--color-secundario);
+    text-align: right;
+  }
+}
+
+/* ===============================
+   VISTA MÓVIL (<992px)
+=============================== */
+@media (max-width: 991.98px) {
+  .row.align-items-center {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  /* 🔹 Toggle (menú) a la izquierda */
+  .col-4.order-1 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  /* 🔹 Logo (imagen + texto juntos) arriba a la derecha */
+  .col-4.order-2.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    text-align: right;
+  }
+
+  .logo img {
+    width: 40px;
+    height: auto;
+  }
+
+  .logo-text h1 {
+    font-size: 1.1rem;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .logo-text p {
+    font-size: 0.7rem;
+    margin: 0;
+    line-height: 1;
+  }
+
+  /* 🔹 “ESTADO DE MÉXICO…” debajo del logo, alineado a la derecha */
+  .col-4.order-3 {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 2px;
+  }
+
+  .location {
+    font-size: 0.75rem;
+    text-align: right;
+    color: var(--color-secundario);
+    line-height: 1.2;
+  }
+
+  /* 🔹 Menú desplegable debajo del toggle */
+  header .collapse.navbar-collapse {
+    top: calc(100% + 8px);
+  }
+}
+
+/* Ajustes extra para pantallas muy pequeñas */
+@media (max-width: 600px) {
+  .logo img { width: 32px; }
+  .logo-text h1 { font-size: 0.9rem; }
+  .logo-text p { font-size: 0.6rem; }
+  .location { font-size: 0.7rem; }
 }
 
 #que-es {
