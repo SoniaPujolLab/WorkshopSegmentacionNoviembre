@@ -606,3 +606,48 @@ footer a {
   text-decoration: none;
   transition: color 0.3s ease;
 }
+
+footer .partners {
+  display: flex;
+  justify-content: center;   /* centra horizontalmente */
+  align-items: flex-start;   /* alinea logos al inicio de la fila */
+  flex-wrap: wrap;           /* varias filas en móvil */
+  gap: 30px;
+  margin-bottom: 20px;       /* separación con el copyright */
+}
+
+/* 🔹 Cada partner */
+footer .partners a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+/* 🔹 Logos con tamaño uniforme (cuadrado) */
+footer .partners a img {
+  width: 120px;             /* mismo ancho para todos */
+  height: 120px;            /* mismo alto para todos */
+  object-fit: contain;      /* mantiene proporción dentro del cuadrado */
+  background-color: #ffffff; /* fondo blanco */
+  border-radius: 5px;        /* bordes redondeados */
+  padding: 5px;              /* espacio interno */
+  transition: transform 0.3s ease;
+}
+
+/* 🔹 Texto debajo del logo */
+footer .partners a span {
+  font-size: 0.8rem;
+  color: #ffffff;            /* texto blanco */
+  text-align: center;
+  margin-top: 5px;           /* separación del logo */
+  max-width: 120px;          /* igual al ancho del logo */
+  word-wrap: break-word;     /* salto de línea si es largo */
+  line-height: 1.2em;
+}
+
+/* 🔹 Hover sobre el logo */
+footer .partners a:hover img {
+  transform: scale(1.05);
+}

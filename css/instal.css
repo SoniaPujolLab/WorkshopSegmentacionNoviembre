@@ -281,6 +281,31 @@ section.preparacion {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+section.preparacion p.resaltado {
+    position: relative;
+    background-color: #fff3cd; /* fondo amarillo claro */
+    border-left: 5px solid #ffc107; /* borde amarillo más fuerte */
+    padding: 15px 20px 15px 50px; /* espacio extra a la izquierda para el ícono */
+    border-radius: 8px;
+    font-weight: 500;
+    color: #856404; /* texto marrón oscuro */
+    margin: 20px 0;
+}
+
+section.preparacion p.resaltado::before {
+    content: "⚠️"; /* símbolo de alerta */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+}
+
+section.preparacion p.resaltado a {
+    color: #4e5155;
+    text-decoration: underline;
+}
+
 section.preparacion h1, 
 section.preparacion h2,
 section.preparacion h3 {
@@ -354,24 +379,67 @@ section.preparacion img.shadow-img {
 }
 
 footer {
-  background-color: #212529; /* mismo tono oscuro que la sección LATAM */
-  color: #f8f9fa;            /* texto claro */
+  background-color: var(--color-footer-fondo);
+  color: var(--color-footer-texto);
   text-align: center;
   padding: 25px 0;
   font-size: 0.95rem;
   margin-top: 0;
-  border-top: 3px solid #000000; /* línea azul de acento */
+  border-top: 3px solid var(--color-footer-borde);
 }
 
-/* 🔹 Texto del footer */
 footer p {
   margin: 0;
-  color: #adb5bd; /* gris claro */
+  color: var(--color-footer-texto);
 }
 
-/* 🔹 Enlaces dentro del footer (si los agregas después) */
 footer a {
-  color: #000000;
+  color: var(--color-footer-borde);
   text-decoration: none;
   transition: color 0.3s ease;
+}
+
+footer .partners {
+  display: flex;
+  justify-content: center;   /* centra horizontalmente */
+  align-items: flex-start;   /* alinea logos al inicio de la fila */
+  flex-wrap: wrap;           /* varias filas en móvil */
+  gap: 30px;
+  margin-bottom: 20px;       /* separación con el copyright */
+}
+
+/* 🔹 Cada partner */
+footer .partners a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+/* 🔹 Logos con tamaño uniforme (cuadrado) */
+footer .partners a img {
+  width: 120px;             /* mismo ancho para todos */
+  height: 120px;            /* mismo alto para todos */
+  object-fit: contain;      /* mantiene proporción dentro del cuadrado */
+  background-color: #ffffff; /* fondo blanco */
+  border-radius: 5px;        /* bordes redondeados */
+  padding: 5px;              /* espacio interno */
+  transition: transform 0.3s ease;
+}
+
+/* 🔹 Texto debajo del logo */
+footer .partners a span {
+  font-size: 0.8rem;
+  color: #ffffff;            /* texto blanco */
+  text-align: center;
+  margin-top: 5px;           /* separación del logo */
+  max-width: 120px;          /* igual al ancho del logo */
+  word-wrap: break-word;     /* salto de línea si es largo */
+  line-height: 1.2em;
+}
+
+/* 🔹 Hover sobre el logo */
+footer .partners a:hover img {
+  transform: scale(1.05);
 }
